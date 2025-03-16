@@ -1,4 +1,7 @@
 def min_eating_gorilla(piles, H):
+        if not len(piles) <= H:
+        raise ValueError
+
     def can_eat(K):
         hours = 0
         for x in piles:
