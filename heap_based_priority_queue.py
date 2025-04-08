@@ -4,7 +4,7 @@ class Node:
         self.priority = priority
 
     def __lt__(self, other):
-        return self.priority < other.priority
+        return self.priority > other.priority
 
     def __repr__(self):
         return f"(Value: {self.value}, Priority: {self.priority})"
