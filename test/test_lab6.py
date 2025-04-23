@@ -6,36 +6,48 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../s
 from lab6 import count_pairs
 
 
-class TestTribeCombinations(unittest.TestCase):
-
-    def test_basic_case(self):
-        pairs = [(1, 2), (2, 4), (3, 5)]
-        result, combinations = count_pairs(3, pairs)
-        self.assertEqual(result, 4)  # Має бути 4 пари
+class TestCountPairs(unittest.TestCase):
 
     def test_single_tribe(self):
-        pairs = [(1, 2), (1, 3), (1, 4)]
-        result, combinations = count_pairs(3, pairs)
+        n = 3
+        pairs = [(1, 2), (2, 3), (3, 4)]
+        result, combinations = count_pairs(n, pairs)
         self.assertEqual(result, 0)
         self.assertEqual(combinations, [])
 
-    def test_multiple_tribes(self):
-        pairs = [(1, 2), (2, 4), (1, 3), (3, 5), (8, 10)]
-        result, combinations = count_pairs(5, pairs)
-        self.assertEqual(result, 6)  # Має бути 6 пар
+    def test_two_tribes(self):
+        n = 2
+        pairs = [(1, 2), (3, 4)]
+        result, combinations = count_pairs(n, pairs)
+        self.assertEqual(result, 2)
+        self.assertIn((1, 4), combinations)
+        self.assertIn((3, 2), combinations)
 
-    def test_empty_case(self):
+    def test_three_tribes(self):
+        n = 3
+        pairs = [(1, 2), (3, 4), (5, 6)]
+        result, combinations = count_pairs(n, pairs)
+        self.assertEqual(result, 6)
+
+    def test_no_pairs(self):
+        n = 0
         pairs = []
-        result, combinations = count_pairs(0, pairs)
+        result, combinations = count_pairs(n, pairs)
         self.assertEqual(result, 0)
         self.assertEqual(combinations, [])
 
-    def test_edge_case_one_pair(self):
-        pairs = [(1, 2)]
-        result, combinations = count_pairs(1, pairs)
+    def test_odd_only(self):
+        n = 1
+        pairs = [(1, 3)]
+        result, combinations = count_pairs(n, pairs)
         self.assertEqual(result, 0)
-        self.assertEqual(combinations, [])
+
+    def test_even_only(self):
+        n = 1
+        pairs = [(2, 4)]
+        result, combinations = count_pairs(n, pairs)
+        self.assertEqual(result, 0)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()
