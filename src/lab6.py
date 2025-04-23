@@ -57,21 +57,19 @@ def count_pairs(n, pairs):
                 combinations.append((b, g))
                 result += 1
 
-
     return result, combinations
 
 
-with open('../input.txt', 'r', encoding='utf-8') as f:
-    lines = f.read().strip().split('\n')
-    n = int(lines[0])
-    pairs = [tuple(map(int, line.strip().split())) for line in lines[1:n+1]]
+n = int(input("Введіть кількість пар: "))
+pairs = []
+print("Введіть пари у форматі 'a b':")
+for _ in range(n):
+    a, b = map(int, input().split())
+    pairs.append((a, b))
 
 result, combinations = count_pairs(n, pairs)
 
-with open('../output.txt', 'w', encoding='utf-8') as f:
-    f.write(
-        f"Кількість можливих комбінацій: {result}\n"
-    )
-    if combinations:
-        formatted = ', '.join(f'{b}/{g}' for b, g in combinations)
-        f.write(f"(Можливі пари - {formatted})\n")
+print(f"\nКількість можливих шлюбів: {result}")
+if combinations:
+    formatted = ', '.join(f'{b}/{g}' for b, g in combinations)
+    print(f"(Можливі пари - {formatted})")
